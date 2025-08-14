@@ -1,6 +1,6 @@
 import os
 import snowflake.connector
-import pandas as pd
+import pandas as pd 
 
 # Read credentials from environment variables
 conn = snowflake.connector.connect(
