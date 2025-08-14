@@ -14,7 +14,7 @@ conn = snowflake.connector.connect(
 
 cur = conn.cursor()
 
-try:
+try: 
     # Create table if not exists
     cur.execute("""
         CREATE TABLE IF NOT EXISTS MY_TABLE (
