@@ -12,26 +12,31 @@ conn = snowflake.connector.connect(
     schema="PUBLIC"
 )
 
-# Example: Load CSV into a Snowflake table
-file_path = "data.csv"
-df = pd.read_csv(file_path)
-
-# Create a cursor
 cur = conn.cursor()
 
-# Create table if not exists
-cur.execute("""
-CREATE TABLE IF NOT EXISTS MY_TABLE (
-    ID INT,
-    NAME STRING
-)
-""")
+try:
+    # Create table if not exists
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS MY_TABLE (
+            ID INT,
+            NAME STRING
+        )
+    """)
 
-# Insert data
-for _, row in df.iterrows():
-    cur.execute("INSERT INTO MY_TABLE (ID, NAME) VALUES (%s, %s)", (int(row.ID), row.NAME))
+    # Dummy hardcoded values
+    data = [
+        (1, "Alice"),
+        (2, "Bob"),
+        (3, "Charlie"),
+        (4, "David")
+    ]
 
-cur.close()
-conn.close()
+    # Insert each row into the table
+    for row in data:
+        cur.execute("INSERT INTO MY_TABLE (ID, NAME) VALUES (%s, %s)", row)
 
-print("✅ Data loaded to Snowflake successfully")
+    print("✅ Dummy data loaded successfully into MY_TABLE")
+
+finally:
+    cur.close()
+    conn.close()
