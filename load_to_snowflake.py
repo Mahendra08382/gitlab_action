@@ -3,7 +3,7 @@ import snowflake.connector
 import pandas as pd 
 
 # Read credentials from environment variables
-conn = snowflake.connector.connect(
+conn = snowflake.connector.connect( 
 	user="MAHENDRA",
     password="Sr-Uh4YPYiY-2bd",
     account="yv62438.central-india.azure",
