@@ -1,0 +1,12 @@
+stages:
+  - load_data
+
+load_to_snowflake:
+  stage: load_data
+  image: python:3.10
+  before_script:
+    - pip install snowflake-connector-python pandas
+  script:
+    - python load_to_snowflake.py
+  only:
+    - main
