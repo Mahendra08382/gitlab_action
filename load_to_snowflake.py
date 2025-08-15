@@ -12,6 +12,7 @@ conn = snowflake.connector.connect(
     schema="PUBLIC"
 )
 
+
 cur = conn.cursor()
 
 try: 
