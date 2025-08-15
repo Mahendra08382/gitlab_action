@@ -9,7 +9,7 @@ conn = snowflake.connector.connect(
     account="yv62438.central-india.azure",
     warehouse="COMPUTE_WH",
     database="MY_WORK_DB",
-    schema="PUBLIC"
+    schema="PUBLIC"  
 )
 
 
