@@ -1,17 +1,18 @@
-name: Trigger GitLab Pull Mirror
+name: Mirror to GitLab
 
 on:
   push:
     branches:
-      - main   # change if needed
+      - '**'
 
 jobs:
-  trigger:
+  mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger GitLab Pull
-        run: |
-          curl --request POST \
-               --header "PRIVATE-TOKEN: ${{ secrets.GITLAB_TOKEN }}" \
-               "https://gitlab.com/api/v4/projects/73038362/mirror/pull"
+      - name: Checkout source
+        uses: actions/checkout@v4
 
+      - name: Push to GitLab
+        run: |
+          git remote add gitlab https://gitlab-ci-token:${{ secrets.GITLAB_TOKEN }}@github.com/Mahendra08382/gitlab_action.git
+          git push --mirror gitlab
