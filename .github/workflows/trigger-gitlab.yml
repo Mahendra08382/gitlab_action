@@ -1,18 +1,20 @@
-name: Mirror to GitLab
-
-on:
-  push:
-    branches:
-      - '**'
-
 jobs:
-  mirror:
+  sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Push to GitLab
+      - name: Configure Git
         run: |
-          git remote add gitlab https://gitlab-ci-token:${{ secrets.GITLAB_TOKEN }}@github.com/Mahendra08382/gitlab_action.git
-          git push --mirror gitlab
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Push changes to GitLab
+        env:
+          TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          git remote set-url origin https://x-access-token:${GITLAB_TOKEN}@github.com/Mahendra08382/gitlab_action.git
+          git push origin HEAD:main
