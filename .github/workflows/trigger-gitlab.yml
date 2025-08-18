@@ -24,6 +24,9 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
           git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/naikmahendra646-group/gitlab_action.git
-          git push --mirror gitlab
+          # Push all branches
+          git push gitlab --all
+          # Push all tags
+          git push gitlab --tags
 
 
