@@ -21,7 +21,7 @@ jobs:
 
       - name: Push to GitLab
         env:
-          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }} # this token is from the gitlab main window not inside project
         run: |
           git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/naikmahendra646-group/gitlab_action.git
           # Push all branches
