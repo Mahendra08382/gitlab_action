@@ -1,3 +1,10 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches:
+      - main   # or your branch name (e.g., "feature/*")
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -14,7 +21,7 @@ jobs:
 
       - name: Push changes to GitLab
         env:
-          TOKEN: ${{ secrets.GH_PAT }}
+          TOKEN: ${{ secrets.GH_PAT }}   # your GitHub PAT stored in secrets
         run: |
-          git remote set-url origin https://x-access-token:${GITLAB_TOKEN}@github.com/Mahendra08382/gitlab_action.git
-          git push origin HEAD:main
+          git remote add gitlab https://oauth2:${TOKEN}@gitlab.com/<your-username>/<your-gitlab-repo>.git
+          git push gitlab HEAD:main
