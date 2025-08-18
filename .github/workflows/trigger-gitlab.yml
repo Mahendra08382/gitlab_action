@@ -3,7 +3,7 @@ name: Mirror to GitLab
 on:
   push:
     branches:
-      - main   # change if you want develop or feature/*
+      - main   # mirror only main
 
 jobs:
   sync:
@@ -19,10 +19,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Push changes to GitLab
+      - name: Push to GitLab
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git remote add gitlab origin https://x-access-token:${GITLAB_TOKEN}@github.com/Mahendra08382/gitlab_action.git
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/<your-username>/<your-gitlab-repo>.git
           git push gitlab HEAD:main
-
