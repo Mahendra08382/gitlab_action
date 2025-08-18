@@ -23,5 +23,6 @@ jobs:
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/<your-username>/<your-gitlab-repo>.git
-          git push gitlab HEAD:main
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/mahendra08382/gitlab_action.git
+          git push --mirror gitlab
+
