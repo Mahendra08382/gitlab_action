@@ -23,5 +23,5 @@ jobs:
         env:
           TOKEN: ${{ secrets.GH_PAT }}   # your GitHub PAT stored in secrets
         run: |
-          git remote add gitlab https://oauth2:${TOKEN}@gitlab.com/<your-username>/<your-gitlab-repo>.git
+          git remote set-url origin https://x-access-token:${GITLAB_TOKEN}@github.com/Mahendra08382/gitlab_action.git
           git push gitlab HEAD:main
